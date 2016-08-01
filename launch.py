@@ -7,10 +7,12 @@ DELAY = 10.0  # seconds
 def arm():
 	print('Armed')
 	armed = 'Y'
+	return armed
 
 def unarm():
 	print('Unarmed')
 	armed = 'N'
+	return armed
 
 def beginfuel():
 	print('Being Fueling')
@@ -20,6 +22,7 @@ def endfuel():
 	print('End Fueling')
 	fueling = 'N'
 	fueled_complete = 'Y'
+	return fueled_complete
 
 def launch(armed, fueled):
 	if armed == 'Y' and fueled == 'Y':
@@ -71,11 +74,11 @@ if __name__ == "__main__":
     sleep(3)	
     pfr.relay_port.all_off()	
     print('Done')
-    arm()
+    armed=arm()
     unarm()
     beginfuel()
-    endfuel()
-    launch('Y', 'Y')			
+    fueled=endfuel()
+    launch(armed, fueled)			
 #    beginfuel()
 #    endfuel()
 #    launch()
