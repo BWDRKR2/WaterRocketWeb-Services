@@ -6,38 +6,44 @@ DELAY = 10.0  # seconds
 
 def arm():
 	print('Armed')
+	armed = 'Y'
 
 def unarm():
 	print('Unarmed')
+	armed = 'N'
 
 def beginfuel():
 	print('Being Fueling')
+	fueling = 'Y'
 
 def endfuel():
 	print('End Fueling')
+	fueling = 'N'
+	fueled_complete = 'Y'
 
-def launch():
-	print('10')
-	sleep(10)
-	print('9')
-	sleep(10)
-	print('8')
-	sleep(10)
-	print('7')
-	sleep(10)
-	print('6')
-	sleep(10)
-	print('5')
-	sleep(10)
-	print('4')
-	sleep(10)
-	print('3')
-	sleep(10)
-	print('2')
-	sleep(10)
-	print('1')
-	sleep(1)
-	print('Lift Off')
+def launch(armed, fueled):
+	if armed == 'Y' and fueled == 'Y':
+		print('10')
+		sleep(10)
+		print('9')
+		sleep(10)
+		print('8')
+		sleep(10)
+		print('7')
+		sleep(10)
+		print('6')
+		sleep(10)
+		print('5')
+		sleep(10)
+		print('4')
+		sleep(10)
+		print('3')
+		sleep(10)
+		print('2')
+		sleep(10)
+		print('1')
+		sleep(1)
+		print('Lift Off')
 
 if __name__ == "__main__":
     pfr = pifacerelayplus.PiFaceRelayPlus(pifacerelayplus.RELAY)
@@ -69,7 +75,7 @@ if __name__ == "__main__":
     unarm()
     beginfuel()
     endfuel()
-    launch()			
+    launch('Y', 'Y')			
 #    beginfuel()
 #    endfuel()
 #    launch()
