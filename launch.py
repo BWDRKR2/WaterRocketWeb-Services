@@ -2,7 +2,7 @@ from time import sleep
 import pifacerelayplus
 
 
-DELAY = 10.0  # seconds
+DELAY = 11.0  # seconds
 
 
 if __name__ == "__main__":
