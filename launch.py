@@ -4,6 +4,40 @@ import pifacerelayplus
 
 DELAY = 10.0  # seconds
 
+def arm():
+	print('Armed')
+
+def unarm():
+	print('Unarmed')
+
+def beginfuel():
+	print('Being Fueling')
+
+def endfuel():
+	print('End Fueling')
+
+def launch():
+	print('10')
+	sleep(10)
+	print('9')
+	sleep(10)
+	print('8')
+	sleep(10)
+	print('7')
+	sleep(10)
+	print('6')
+	sleep(10)
+	print('5')
+	sleep(10)
+	print('4')
+	sleep(10)
+	print('3')
+	sleep(10)
+	print('2')
+	sleep(10)
+	print('1')
+	sleep(1)
+	print('Lift Off')
 
 if __name__ == "__main__":
     pfr = pifacerelayplus.PiFaceRelayPlus(pifacerelayplus.RELAY)
@@ -28,12 +62,20 @@ if __name__ == "__main__":
     pfr.relays[2].turn_on()
     pfr.relays[3].turn_on()
     print('Five')
-    sleep(30)	
+    sleep(3)	
     pfr.relay_port.all_off()	
-	
-print('Done')
+    print('Done')
+    arm()
+    unarm()
+    beginfuel()
+    endfuel()
+    launch()			
+#    beginfuel()
+#    endfuel()
+#    launch()
 exit()
 
 
-def arm()
-	print('Armed')
+
+
+
