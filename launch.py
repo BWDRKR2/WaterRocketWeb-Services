@@ -1,8 +1,10 @@
 from time import sleep
 import pifacerelayplus
-
+import configparser
 
 DELAY = 10.0  # seconds
+#Config = ConfigParser.ConfigParser()
+
 
 def arm():
 	print('Armed')
