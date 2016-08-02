@@ -57,6 +57,11 @@ def launch(pfr, armed, fueled):
 		sleep(2)
 		pfr.relays[1].toggle()
 
+def createconfig(Config):
+	Config = configparser.ConfigParser()
+	
+
+
 if __name__ == "__main__":
     pfr = pifacerelayplus.PiFaceRelayPlus(pifacerelayplus.RELAY)
 
@@ -65,6 +70,7 @@ if __name__ == "__main__":
     beginfuel(pfr)
     fueled=endfuel(pfr)
     launch(pfr,armed, fueled)
+    createconfig(Config)
     
 exit()
 
