@@ -15,10 +15,10 @@ def unarm():
 	return armed
 
 def beginfuel(pfr):
-	print('Being Fueling')
+	print('Begin Fueling')
 	fueling = 'Y'
 	pfr.relays[0].turn_on()
-	sleep(20)
+	sleep(10)
 
 def endfuel(pfr):
 	print('End Fueling')
@@ -29,6 +29,7 @@ def endfuel(pfr):
 
 def launch(pfr, armed, fueled):
 	if armed == 'Y' and fueled == 'Y':
+		print('Starting Launch Sequence')
 		print('10')
 		sleep(1)
 		print('9')
@@ -51,45 +52,18 @@ def launch(pfr, armed, fueled):
 		sleep(1)
 		pfr.relays[1].turn_on()
 		print('Lift Off')
-		sleep(5)
+		sleep(2)
 		pfr.relays[1].toggle()
 
 if __name__ == "__main__":
     pfr = pifacerelayplus.PiFaceRelayPlus(pifacerelayplus.RELAY)
-#    pfr.relays[0].toggle()
-    #pfr.relays[0].turn_off()
-#    sleep(DELAY)
-#    pfr.relays[0].toggle()
-#    sleep(DELAY)
-#    print ('TWo')
-	
-#    pfr.relays[0].toggle() 
-#    sleep(5)
-#    pfr.relays[0].toggle()		
-    #pfr.relays[0].toggle()
-    #pfr.relay_port.all_off()
-#    print('Three')
-#    pfr.relay_port.value = 0xAA
-#    pfr.relay_port.all_off()
-#    print('Four')
-#    pfr.relays[0].turn_on()
-#    pfr.relays[1].turn_on()
-#    pfr.relays[2].turn_on()
-#    pfr.relays[3].turn_on()
-#    print('Five')
-#    sleep(3)	
-#    pfr.relay_port.all_off()	
-#    print('Done')
+
     armed=arm()
-    unarm()
+#    unarm()
     beginfuel(pfr)
     fueled=endfuel(pfr)
     launch(pfr,armed, fueled)
     
-				
-#    beginfuel()
-#    endfuel()
-#    launch()
 exit()
 
 
