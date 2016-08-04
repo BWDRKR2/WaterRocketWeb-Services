@@ -29,6 +29,9 @@ def endfuel(pfr):
 	fueled_complete = 'Y'
 	return fueled_complete
 
+def abort():
+	a=0
+
 def launch(pfr, armed, fueled):
 	if armed == 'Y' and fueled == 'Y':
 		print('Starting Launch Sequence')
@@ -57,8 +60,15 @@ def launch(pfr, armed, fueled):
 		sleep(2)
 		pfr.relays[1].toggle()
 
-def createconfig(Config):
-	Config = configparser.ConfigParser()
+def createconfig(Config, Armed, Fueled, Launch):
+	cfgfile = open("launch.cfg",'w')
+	Config.add_section('Launch_Settings')
+	Config['Launch_Settings']['Armed'] = Armed
+	Config['Launch_Settings']['Fueled'] = Fueled
+	Config['Launch_Settings']['Launch'] = Launch
+	Config.write(cfgfile)
+	cfgfile.close()
+
 	
 
 
@@ -70,7 +80,10 @@ if __name__ == "__main__":
     beginfuel(pfr)
     fueled=endfuel(pfr)
     launch(pfr,armed, fueled)
-    createconfig(Config)
+    Armed = 'Y'
+    Fueled = 'Y'
+    Launch = 'N'		
+    createconfig(Config, Armed, Fueled, Launch)
     
 exit()
 
