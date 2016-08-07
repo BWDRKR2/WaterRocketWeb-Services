@@ -3,22 +3,31 @@ import pifacerelayplus
 import configparser
 
 DELAY = 10.0  # seconds
-Config = configparser.ConfigParser()
+#Config = configparser.ConfigParser()
 
 
 def arm():
 	print('Armed')
 	armed = 'Y'
+	fueled = 'N'
+	launch = 'N'
+	createconfig(armed, fueled, launch)
 	return armed
 
 def unarm():
 	print('Unarmed')
 	armed = 'N'
+	fueled = 'N'
+	launch = 'N'
+	createconfig(armed, fueled, launch)
 	return armed
 
 def beginfuel(pfr):
 	print('Begin Fueling')
+	armed = 'Y'
 	fueling = 'Y'
+	launch = 'N'
+	createconfig(armed, fueling, launch) 
 	pfr.relays[0].turn_on()
 	sleep(10)
 
@@ -60,7 +69,8 @@ def launch(pfr, armed, fueled):
 		sleep(2)
 		pfr.relays[1].toggle()
 
-def createconfig(Config, Armed, Fueled, Launch):
+def createconfig(Armed, Fueled, Launch):
+	Config = configparser.ConfigParser()
 	cfgfile = open("launch.cfg",'w')
 	Config.add_section('Launch_Settings')
 	Config['Launch_Settings']['Armed'] = Armed
@@ -83,7 +93,7 @@ if __name__ == "__main__":
     Armed = 'Y'
     Fueled = 'Y'
     Launch = 'N'		
-    createconfig(Config, Armed, Fueled, Launch)
+   # creeateconfig(Armed, Fueled, Launch)
     
 exit()
 
