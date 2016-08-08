@@ -9,14 +9,16 @@ DELAY = 10.0  # seconds
 def arm():
 	print('Armed')
 	armed = 'Y'
+	fueling = 'N'
 	fueled = 'N'
 	launch = 'N'
-	createconfig(armed, fueled, launch)
+	createconfig(armed, fueling, fueled, launch)
 	return armed
 
 def unarm():
 	print('Unarmed')
 	armed = 'N'
+	fueling = 'N'
 	fueled = 'N'
 	launch = 'N'
 	createconfig(armed, fueled, launch)
@@ -26,8 +28,9 @@ def beginfuel(pfr):
 	print('Begin Fueling')
 	armed = 'Y'
 	fueling = 'Y'
+	fueled = 'N'
 	launch = 'N'
-	createconfig(armed, fueling, launch) 
+	createconfig(armed, fueling, fueled, launch) 
 	pfr.relays[0].turn_on()
 	sleep(10)
 
@@ -69,11 +72,12 @@ def launch(pfr, armed, fueled):
 		sleep(2)
 		pfr.relays[1].toggle()
 
-def createconfig(Armed, Fueled, Launch):
+def createconfig(Armed, Fueling, Fueled, Launch):
 	Config = configparser.ConfigParser()
 	cfgfile = open("launch.cfg",'w')
 	Config.add_section('Launch_Settings')
 	Config['Launch_Settings']['Armed'] = Armed
+	Config['Launch_Settings']['Fueling'] = Fueling
 	Config['Launch_Settings']['Fueled'] = Fueled
 	Config['Launch_Settings']['Launch'] = Launch
 	Config.write(cfgfile)
@@ -90,9 +94,9 @@ if __name__ == "__main__":
     beginfuel(pfr)
     fueled=endfuel(pfr)
     launch(pfr,armed, fueled)
-    Armed = 'Y'
-    Fueled = 'Y'
-    Launch = 'N'		
+    #Armed = 'Y'
+    #Fueled = 'Y'
+    #Launch = 'N'		
    # creeateconfig(Armed, Fueled, Launch)
     
 exit()
