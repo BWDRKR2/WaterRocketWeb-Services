@@ -3,7 +3,6 @@ import pifacerelayplus
 import configparser
 
 DELAY = 10.0  # seconds
-#Config = configparser.ConfigParser()
 
 
 def reset():
