@@ -36,10 +36,13 @@ def beginfuel(pfr):
 
 def endfuel(pfr):
 	print('End Fueling')
+	armed = 'Y'
 	fueling = 'N'
+	fueled = 'Y'
+	launch = 'N'
 	pfr.relays[0].toggle() 
-	fueled_complete = 'Y'
-	return fueled_complete
+	createconfig(armed, fueling, fueled, launch)
+	return fueled
 
 def abort():
 	a=0
