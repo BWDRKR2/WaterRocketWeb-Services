@@ -96,22 +96,21 @@ def createconfig(Armed, Fueling, Fueled, Launch):
 	Config.write(cfgfile)
 	cfgfile.close()
 
-	
-
+def readconfig():
+	print('Read Config Test')	
+	Config = configparser.ConfigParser()
+	Config.read("lanuch.cfg")
 
 if __name__ == "__main__":
     pfr = pifacerelayplus.PiFaceRelayPlus(pifacerelayplus.RELAY)
 
-    reset()	
+    reset()
+    readconfig()		
     armed=arm()
 #    unarm()
     beginfuel(pfr)
     fueled=endfuel(pfr)
     launch(pfr,armed, fueled)
-    #Armed = 'Y'
-    #Fueled = 'Y'
-    #Launch = 'N'		
-   # creeateconfig(Armed, Fueled, Launch)
     
 exit()
 
