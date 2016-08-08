@@ -6,6 +6,13 @@ DELAY = 10.0  # seconds
 #Config = configparser.ConfigParser()
 
 
+def reset():
+	armed = 'N'
+	fueling = 'N'
+	fueled = 'N'
+	launch = 'N'
+	createconfig(armed, fueling, fueled, launch)
+
 def arm():
 	print('Armed')
 	armed = 'Y'
@@ -21,7 +28,7 @@ def unarm():
 	fueling = 'N'
 	fueled = 'N'
 	launch = 'N'
-	createconfig(armed, fueled, launch)
+	createconfig(armed, fueling, fueled, launch)
 	return armed
 
 def beginfuel(pfr):
@@ -74,6 +81,9 @@ def launch(pfr, armed, fueled):
 		print('Lift Off')
 		sleep(2)
 		pfr.relays[1].toggle()
+		fueling = 'N'
+		launch = 'Y'
+		createconfig(armed, fueling, fueled, launch)
 
 def createconfig(Armed, Fueling, Fueled, Launch):
 	Config = configparser.ConfigParser()
@@ -92,6 +102,7 @@ def createconfig(Armed, Fueling, Fueled, Launch):
 if __name__ == "__main__":
     pfr = pifacerelayplus.PiFaceRelayPlus(pifacerelayplus.RELAY)
 
+    reset()	
     armed=arm()
 #    unarm()
     beginfuel(pfr)
