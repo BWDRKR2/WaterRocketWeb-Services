@@ -2,7 +2,7 @@ from time import sleep
 import pifacerelayplus
 import configparser
 
-DELAY = 10.0  # seconds
+
 
 
 def reset():
@@ -85,8 +85,8 @@ def launch(pfr, armed, fueled):
 		createconfig(armed, fueling, fueled, launch)
 
 def createconfig(Armed, Fueling, Fueled, Launch):
-	Config = configparser.ConfigParser()
 	cfgfile = open("launch.cfg",'w')
+	Config = configparser.ConfigParser()
 	Config.add_section('Launch_Settings')
 	Config['Launch_Settings']['Armed'] = Armed
 	Config['Launch_Settings']['Fueling'] = Fueling
@@ -98,7 +98,16 @@ def createconfig(Armed, Fueling, Fueled, Launch):
 def readconfig():
 	print('Read Config Test')	
 	Config = configparser.ConfigParser()
-	Config.read("lanuch.cfg")
+	Config.read("launch.cfg")
+	armed = Config.get('Launch_Settings','Armed')
+	fueling = Config.get('Launch_Settings', 'Fueling')
+	fueled = Config.get('Launch_Settings', 'Fueled')
+	launch = Config.get('Launch_Settings', 'Launch')
+	print('Armed = ',armed)
+	print('Fueling = ',fueling)
+	print('Fueled = ', fueled)
+	print('Launch = ', launch) 
+
 
 if __name__ == "__main__":
     pfr = pifacerelayplus.PiFaceRelayPlus(pifacerelayplus.RELAY)
