@@ -53,7 +53,9 @@ def endfuel(pfr):
 def abort():
 	a=0
 
-def launch(pfr, armed, fueled):
+def launch(pfr):
+	armed, fueling, fueled, launch = readconfig()
+	print("XXXXX")
 	if armed == 'Y' and fueled == 'Y':
 		print('Starting Launch Sequence')
 		print('10')
@@ -118,7 +120,7 @@ if __name__ == "__main__":
 #    unarm()
     beginfuel(pfr)
     fueled=endfuel(pfr)
-    launch(pfr,armed, fueled)
+    launch(pfr)
     
 exit()
 
