@@ -107,7 +107,7 @@ def readconfig():
 	print('Fueling = ',fueling)
 	print('Fueled = ', fueled)
 	print('Launch = ', launch) 
-
+	return armed, fueling, fueled, launch
 
 if __name__ == "__main__":
     pfr = pifacerelayplus.PiFaceRelayPlus(pifacerelayplus.RELAY)
