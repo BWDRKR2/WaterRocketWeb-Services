@@ -65,15 +65,17 @@ def abort():
 
 
 def launch(pfr):
-	armed, fueling, fueled, launch = readconfig()
-	print("XXXXX")
-	if armed == 'Y' and fueled == 'Y':
+	armed, fueling, fueled, launch, abort = readconfig()
+
+	if armed == 'Y' and fueled == 'Y' and abort == 'N'  :
 		count = 10
 		print('Starting Launching Squence')
-		while (count !=  0):
+		while (count !=  0 and abort == 'N'):
 			print(count)
 			sleep(1)
 			count = count - 1
+			armed, fueling, fueled, launch, abort = readconfig()			
+
 
 		pfr.relays[1].turn_on()
 		print('Lift Off')
@@ -81,7 +83,8 @@ def launch(pfr):
 		pfr.relays[1].toggle()
 		fueling = 'N'
 		launch = 'Y'
-		createconfig(armed, fueling, fueled, launch)
+		abort = 'N'
+		createconfig(armed, fueling, fueled, launch, abort)
 
 def createconfig(Armed, Fueling, Fueled, Launch, Abort):
 	cfgfile = open("launch.cfg",'w')
@@ -95,8 +98,7 @@ def createconfig(Armed, Fueling, Fueled, Launch, Abort):
 	Config.write(cfgfile)
 	cfgfile.close()
 
-def readconfig():
-	print('Read Config Test')	
+def readconfig():	
 	Config = configparser.ConfigParser()
 	Config.read("launch.cfg")
 	armed = Config.get('Launch_Settings','Armed')
@@ -104,11 +106,6 @@ def readconfig():
 	fueled = Config.get('Launch_Settings', 'Fueled')
 	launch = Config.get('Launch_Settings', 'Launch')
 	abort = Config.get('Launch_Settings', 'Abort')
-	print('Armed = ',armed)
-	print('Fueling = ',fueling)
-	print('Fueled = ', fueled)
-	print('Launch = ', launch) 
-	print('Abort = ', abort)
 	return armed, fueling, fueled, launch, abort
 
 if __name__ == "__main__":
