@@ -10,7 +10,8 @@ def reset():
 	fueling = 'N'
 	fueled = 'N'
 	launch = 'N'
-	createconfig(armed, fueling, fueled, launch)
+	abort = 'N'
+	createconfig(armed, fueling, fueled, launch, abort)
 
 def arm():
 	print('Armed')
@@ -18,7 +19,8 @@ def arm():
 	fueling = 'N'
 	fueled = 'N'
 	launch = 'N'
-	createconfig(armed, fueling, fueled, launch)
+	abort = 'N'
+	createconfig(armed, fueling, fueled, launch, abort)
 	return armed
 
 def unarm():
@@ -36,7 +38,8 @@ def beginfuel(pfr):
 	fueling = 'Y'
 	fueled = 'N'
 	launch = 'N'
-	createconfig(armed, fueling, fueled, launch) 
+	abort = 'N'
+	createconfig(armed, fueling, fueled, launch, abort) 
 	pfr.relays[0].turn_on()
 	sleep(10)
 
@@ -46,12 +49,20 @@ def endfuel(pfr):
 	fueling = 'N'
 	fueled = 'Y'
 	launch = 'N'
+	abort = 'N'
 	pfr.relays[0].toggle() 
-	createconfig(armed, fueling, fueled, launch)
+	createconfig(armed, fueling, fueled, launch, abort)
 	return fueled
 
 def abort():
-	a=0
+	print('Abort Launching')
+	armed = 'Y'
+	fueling = 'N'
+	fueled = 'N'
+	launch = 'Y'
+	abort = 'Y'
+	createconfig(armed, fueling, fueled, launch, abort)
+
 
 def launch(pfr):
 	armed, fueling, fueled, launch = readconfig()
@@ -72,7 +83,7 @@ def launch(pfr):
 		launch = 'Y'
 		createconfig(armed, fueling, fueled, launch)
 
-def createconfig(Armed, Fueling, Fueled, Launch):
+def createconfig(Armed, Fueling, Fueled, Launch, Abort):
 	cfgfile = open("launch.cfg",'w')
 	Config = configparser.ConfigParser()
 	Config.add_section('Launch_Settings')
@@ -80,6 +91,7 @@ def createconfig(Armed, Fueling, Fueled, Launch):
 	Config['Launch_Settings']['Fueling'] = Fueling
 	Config['Launch_Settings']['Fueled'] = Fueled
 	Config['Launch_Settings']['Launch'] = Launch
+	Config['Launch_Settings']['Abort'] = Abort
 	Config.write(cfgfile)
 	cfgfile.close()
 
@@ -91,11 +103,13 @@ def readconfig():
 	fueling = Config.get('Launch_Settings', 'Fueling')
 	fueled = Config.get('Launch_Settings', 'Fueled')
 	launch = Config.get('Launch_Settings', 'Launch')
+	abort = Config.get('Launch_Settings', 'Abort')
 	print('Armed = ',armed)
 	print('Fueling = ',fueling)
 	print('Fueled = ', fueled)
 	print('Launch = ', launch) 
-	return armed, fueling, fueled, launch
+	print('Abort = ', abort)
+	return armed, fueling, fueled, launch, abort
 
 if __name__ == "__main__":
     pfr = pifacerelayplus.PiFaceRelayPlus(pifacerelayplus.RELAY)
