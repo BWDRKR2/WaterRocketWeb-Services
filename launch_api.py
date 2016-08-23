@@ -3,7 +3,6 @@ import pifacerelayplus
 import configparser
 
 
-pfr = pifacerelayplus.PiFaceRelayPlus(pifacerelayplus.RELAY)
 
 def reset():
 	armed = 'N'
@@ -32,7 +31,8 @@ def unarm():
 	createconfig(armed, fueling, fueled, launch)
 	return armed
 
-def beginfuel(pfr):
+def beginfuel():
+	pfr = pifacerelayplus.PiFaceRelayPlus(pifacerelayplus.RELAY)	
 	print('Begin Fueling')
 	armed = 'Y'
 	fueling = 'Y'
@@ -43,7 +43,8 @@ def beginfuel(pfr):
 	pfr.relays[0].turn_on()
 	sleep(10)
 
-def endfuel(pfr):
+def endfuel():
+	pfr = pifacerelayplus.PiFaceRelayPlus(pifacerelayplus.RELAY)
 	print('End Fueling')
 	armed = 'Y'
 	fueling = 'N'

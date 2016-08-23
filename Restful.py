@@ -24,14 +24,16 @@ class Unarm(object):
 
 class BeginFuel(object):
     def on_get(self, req, resp):
-     	resp.status = falcon.HTTP_200
-	resp.body = ('Begin Fuel = Y')
 	a=launch_api.beginfuel()
+	resp.status = falcon.HTTP_200
+	resp.body = ('Begin Fuel = Y')
+	
 
 class EndFuel(object):
     def on_get(self, req, resp):
 	resp.status = falcon.HTTP_200
-	resp.body = ('End Fuel = Y')	
+	resp.body = ('End Fuel = Y')
+	a=launch_api.endfuel()	
 
 class Abort(object):
     def on_get(self, reg, resp):
