@@ -42,9 +42,10 @@ def beginfuel():
 	createconfig(armed, fueling, fueled, launch, abort) 
 	pfr.relays[0].turn_on()
 	sleep(10)
+	endfuel(pfr)
 
-def endfuel():
-	pfr = pifacerelayplus.PiFaceRelayPlus(pifacerelayplus.RELAY)
+def endfuel(pfr):
+	#pfr = pifacerelayplus.PiFaceRelayPlus(pifacerelayplus.RELAY)
 	print('End Fueling')
 	armed = 'Y'
 	fueling = 'N'
