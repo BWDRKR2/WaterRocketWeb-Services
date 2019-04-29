@@ -73,23 +73,12 @@ def abort():
 def launch():
 	armed, fueling, fueled, launch, abort = readconfig()
         pfr = pifacerelayplus.PiFaceRelayPlus(pifacerelayplus.RELAY)
-	##sleep(2)
-	##pfr.relays[1].toggle()
-
-        ##
-        pfr.relays[0].turn_on()
-        ##
- 
+	pfr.relays[0].turn_on()
         pfr.relays[1].turn_on()
         sleep(1) 
         pfr.relays[1].toggle()
-
-        ##
         pfr.relays[0].toggle()
-        ## 
-
-
-	fueling = 'N'
+        fueling = 'N'
 	launch = 'Y'
 	abort = 'N'
 	createconfig(armed, fueling, fueled, launch, abort)
